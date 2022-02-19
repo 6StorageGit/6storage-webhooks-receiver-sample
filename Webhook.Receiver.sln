@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webhook.Receiver", "src\Webhook.Receiver\Webhook.Receiver.csproj", "{C05FF16A-24A9-4370-B23F-230F7890C296}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{462AA785-178F-466D-95CE-F76965F2B212}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1ACCDC2-23C3-4509-977B-2FAC687FD916}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C05FF16A-24A9-4370-B23F-230F7890C296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05FF16A-24A9-4370-B23F-230F7890C296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05FF16A-24A9-4370-B23F-230F7890C296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05FF16A-24A9-4370-B23F-230F7890C296}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C05FF16A-24A9-4370-B23F-230F7890C296} = {462AA785-178F-466D-95CE-F76965F2B212}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD7AF1B0-B0ED-4477-ACFF-C8A69FF9BE88}
+	EndGlobalSection
+EndGlobal

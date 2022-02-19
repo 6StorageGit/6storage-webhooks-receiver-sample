@@ -1,7 +1,17 @@
+using Serilog;
 using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+builder.Logging.AddSerilog(Log.Logger);
+
+Log.Information("Starting up");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,6 +31,8 @@ app.MapPost("/webhook-receiver", async (HttpContext context) =>
     using (StreamReader reader = new(context.Request.Body, Encoding.UTF8))
     {
         var body = await reader.ReadToEndAsync();
+
+        Log.Information(body);
 
         if (!IsSignatureCompatible(context, "ea7305d4-504a-4180-897c-013676756185", body)) // --> if (!IsSignatureCompatible("-TOKEN-", body))
         {

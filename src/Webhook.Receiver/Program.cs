@@ -7,6 +7,7 @@ builder.Logging.ClearProviders();
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
+    .WriteTo.File($"./logs/log-.txt", rollingInterval: RollingInterval.Day)
     .CreateBootstrapLogger();
 
 builder.Logging.AddSerilog(Log.Logger);
@@ -34,7 +35,7 @@ app.MapPost("/webhook-receiver", async (HttpContext context) =>
 
         Log.Information(body);
 
-        if (!IsSignatureCompatible(context, "ea7305d4-504a-4180-897c-013676756185", body)) // --> if (!IsSignatureCompatible("-TOKEN-", body))
+        if (!IsSignatureCompatible(context, "e0c2538a-7562-4571-abee-4240d7242164", body)) // --> if (!IsSignatureCompatible("-TOKEN-", body))
         {
             throw new Exception("Unexpected Signature");
         }
@@ -47,7 +48,7 @@ app.Run();
 
 static bool IsSignatureCompatible(HttpContext context, string secret, string body)
 {
-    if (context.Request.Headers.ContainsKey("X-6Storage-webhook-signature")) // -->  if (!HttpContext.Request.Headers.ContainsKey("-KEY-"))
+    if (!context.Request.Headers.ContainsKey("X-6Storage-webhook-signature")) // -->  if (!HttpContext.Request.Headers.ContainsKey("-KEY-"))
     {
         return false;
     }

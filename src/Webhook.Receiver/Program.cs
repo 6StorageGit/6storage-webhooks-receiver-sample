@@ -12,6 +12,8 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Logging.AddSerilog(Log.Logger);
 
+builder.Configuration.AddJsonFile("appsettings.json");
+
 Log.Information("Starting up");
 
 builder.Services.AddEndpointsApiExplorer();
@@ -19,11 +21,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+var configuration = app.Configuration;
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -35,7 +36,9 @@ app.MapPost("/webhook-receiver", async (HttpContext context) =>
 
         Log.Information(body);
 
-        if (!IsSignatureCompatible(context, "e0c2538a-7562-4571-abee-4240d7242164", body)) // --> if (!IsSignatureCompatible("-TOKEN-", body))
+        Log.Information($"Secret key is '{configuration.GetValue<string>("SecretKey")}'");
+
+        if (!IsSignatureCompatible(context, configuration.GetValue<string>("SecretKey"), body)) // --> if (!IsSignatureCompatible("-TOKEN-", body))
         {
             throw new Exception("Unexpected Signature");
         }
